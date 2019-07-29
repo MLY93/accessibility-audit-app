@@ -85,6 +85,7 @@ const TextInput = ({ active, value, predicted, id, label }) => {
   });
   const [focus, setFocus] = useState(false);
   const [lock, setLock] = useState(false);
+  const [text, setText] = useState("");
 
   const fieldClassName = `field ${(lock ? active : active || value) &&
     "active"} ${lock && !active && "locked"}`;
@@ -103,10 +104,10 @@ const TextInput = ({ active, value, predicted, id, label }) => {
     >
       <Input
         id={id}
-        value={input}
+        value={text}
         placeholder={label}
         type="text"
-        onChange={handleInputChange}
+        onChange={event => setText(event.target.value)}
       />
       <Label htmlFor={1}>{label}</Label>
     </Field>

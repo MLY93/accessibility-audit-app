@@ -30,15 +30,15 @@ const StyledCheckbox = styled.div`
   height: 20px;
   border-radius: 5px;
   margin: 3px 20px;
-  background-color: ${props => (props.check ? "#000" : "green")};
+  background-color: ${props => (props.check ? "green" : "#000")};
   transition: all 150ms;
 
   ${HiddenCheckbox}:focus + & {
-    box-shadow: 0 0 0 3px pink;
+    box-shadow: 0 0 0 3px #000;
   }
 
   ${Icon} {
-    visibility: ${props => (props.check ? "visible" : "hidden")};
+    visibility: ${props => (props.check ? "hidden" : "visible")};
   }
 `;
 
@@ -51,6 +51,7 @@ const Checkbox = ({ ...props }) => {
       <StyledCheckbox
         onClick={e => e.stopPropagation()}
         onChange={() => setCheck(!check)}
+        check={check}
       >
         <Icon viewBox="0 0 24 24">
           <polyline points="20 6 9 17 4 12" />

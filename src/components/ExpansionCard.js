@@ -53,7 +53,7 @@ const StatusIcon = styled.img`
   background: ${props => (props.required ? "" : "")};
 `;
 
-const ExpansionCard = scale => {
+const ExpansionCard = (props, scale) => {
   const [showMore, setShowMore] = useState(false);
 
   return (
