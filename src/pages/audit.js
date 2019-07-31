@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "gatsby";
 import styled from "styled-components";
 import SEO from "../components/seo";
 import ExpansionCard from "../components/ExpansionCard";
@@ -28,13 +27,13 @@ const PanelContainer = styled.div`
   flex-direction: column;
 `;
 
-const auditPage = () => (
+const auditPage = props => (
   <>
     <SEO title="audit" />
     <Page>
       <PanelContainer>
         <Header>Accessibility Checklist</Header>
-        <TextInput label="name of your react component" />
+        <TextInput label="Type the name of your component here..." />
         {sectionsArray.map((item, i) => {
           return (
             <Motion
@@ -46,6 +45,7 @@ const auditPage = () => (
                   scale={interpolatedStyle.scale}
                   heading={item.heading}
                   item={item.item}
+                  subCategories={item.subCategories}
                   key={i}
                 />
               )}

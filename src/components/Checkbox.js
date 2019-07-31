@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const CheckboxContainer = styled.div`
@@ -11,7 +11,7 @@ const Icon = styled.svg`
   stroke-width: 2px;
 `;
 
-const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
+const HiddenCheckbox = styled.input.attrs({ type: "radio" })`
   border: 0;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -26,36 +26,48 @@ const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
 
 const StyledCheckbox = styled.div`
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border-radius: 5px;
-  margin: 3px 20px;
-  background-color: ${props => (props.check ? "green" : "#000")};
+  margin: 8px 8px;
+  background-color: ${props => (props.checked ? props.color : "unset")};
   transition: all 150ms;
+  border: 1px solid #000;
+  cursor: pointer;
 
   ${HiddenCheckbox}:focus + & {
     box-shadow: 0 0 0 3px #000;
   }
 
   ${Icon} {
-    visibility: ${props => (props.check ? "hidden" : "visible")};
+    visibility: ${props => (props.checked ? "visible" : "hidden")};
   }
 `;
 
-const Checkbox = ({ ...props }) => {
-  const [check, setCheck] = useState(false);
+const Checkbox = props => {
+  const [isChecked, setIsChecked] = useState(false);
+  const onChange = () => {
+    props.setSelectedFn(props.value);
+  };
+
+  useEffect(() => {
+    setIsChecked(props.selected === props.value);
+  }, [props.selected]);
 
   return (
     <CheckboxContainer>
-      <HiddenCheckbox onChange={() => setCheck(!check)} {...props} />
+      <HiddenCheckbox
+        {...props}
+        onChange={onChange}
+        name={props.group}
+        checked={isChecked}
+      />
       <StyledCheckbox
-        onClick={e => e.stopPropagation()}
-        onChange={() => setCheck(!check)}
-        check={check}
+        onClick={onChange}
+        checked={isChecked}
+        color={props.color}
       >
-        <Icon viewBox="0 0 24 24">
-          <polyline points="20 6 9 17 4 12" />
-        </Icon>
+        <Icon viewBox="0 0 24 24">{props.icon}</Icon>
       </StyledCheckbox>
     </CheckboxContainer>
   );

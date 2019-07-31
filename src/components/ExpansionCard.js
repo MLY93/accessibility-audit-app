@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Checkbox from "./Checkbox";
+import RadioGroup from "./RadioGroup";
 
 const Panel = styled.div`
   margin-top: 20px;
@@ -29,6 +29,7 @@ const CategoryHeader = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  margin-bottom: 10px;
   cursor: pointer;
 `;
 
@@ -42,34 +43,43 @@ const Heading = styled.h3`
 const CheckList = styled.div`
   transition: all 0.3s ease-in-out;
   padding: 0 14px;
-  margin: 20px 0 20px auto;
 `;
 
-const CheckListItem = styled.label`
-  display: flex;
-  color: #333;
-`;
-const StatusIcon = styled.img`
-  background: ${props => (props.required ? "" : "")};
+const Labels = styled.div`
+  padding: 0 14px;
 `;
 
-const ExpansionCard = (props, scale) => {
+const CheckboxLabel = styled.label`
+  text-align: center;
+  font-size: 12px;
+  width: 30px;
+  margin: 0 8px;
+  display: inline-block;
+`;
+
+const ExpansionCard = props => {
   const [showMore, setShowMore] = useState(false);
 
   return (
-    <Panel scale={scale}>
+    <Panel scale={props.scale}>
       <Required showMore={showMore} />
       <CategoryHeader onClick={() => setShowMore(!showMore)}>
-        <StatusIcon />
         <Heading>{props.heading}</Heading>
       </CategoryHeader>
       {showMore && (
-        <CheckList>
-          <CheckListItem>
-            {props.item}
-            <Checkbox />
-          </CheckListItem>
-        </CheckList>
+        <>
+          <Labels>
+            <CheckboxLabel>Yes</CheckboxLabel>
+            <CheckboxLabel>No</CheckboxLabel>
+            <CheckboxLabel>N/A</CheckboxLabel>
+          </Labels>
+          <CheckList>
+            {props.subCategories &&
+              props.subCategories.map((item, i) => {
+                return <RadioGroup group={i} label={item.heading} />;
+              })}
+          </CheckList>
+        </>
       )}
     </Panel>
   );
