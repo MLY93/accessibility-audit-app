@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Checkbox from "./Checkbox";
 import styled from "styled-components";
 
@@ -17,24 +17,30 @@ const RadioGroupContainer = styled.div`
   padding: 4px 0;
 `;
 
-const RadioGroup = ({ ...props }) => {
-  const [selected, setSelected] = useState("");
+const RadioGroup = props => {
+  const questionKey = `key-${props.section}-${props.question}`;
+  const isSelected = props.globalState.questions[questionKey];
+
+  const updateQuestion = value => {
+    props.setQuestions(questionKey, value);
+  };
+
   return (
     <RadioGroupContainer>
       <Checkbox
-        setSelectedFn={setSelected}
-        selected={selected}
+        setSelectedFn={updateQuestion}
+        selected={isSelected}
         value="pass"
         color="green"
-        group={props.i}
+        group={props.question}
         icon={<polyline points="20 6 9 17 4 12" />}
       />
       <Checkbox
-        setSelectedFn={setSelected}
-        selected={selected}
+        setSelectedFn={updateQuestion}
+        selected={isSelected}
         value="fail"
         color="red"
-        group={props.i}
+        group={props.question}
         icon={
           <>
             <polyline points="6 6 18 18" />
@@ -43,11 +49,11 @@ const RadioGroup = ({ ...props }) => {
         }
       />
       <Checkbox
-        setSelectedFn={setSelected}
-        selected={selected}
+        setSelectedFn={updateQuestion}
+        selected={isSelected}
         value="na"
         color="black"
-        group={props.i}
+        group={props.question}
         icon={<polyline points="4 12 20 12" />}
       />
       <CheckListItem>

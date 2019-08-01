@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import useTextInput from "./CustomHooks";
-import { Motion, spring } from "react-motion";
 
 const Field = styled.div`
   width: 100%;
@@ -10,15 +8,17 @@ const Field = styled.div`
   position: relative;
   background-color: rgba(255, 255, 255, 0.3);
   transition: 0.3s all;
+  /* border: 0.5px solid #512da8; */
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.45);
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 4px 20px 0px #282828;
   }
 
   &:active {
     background-color: #ffffff;
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.2);
+    color: #512da8;
+    box-shadow: 0px 4px 20px 0px #282828;
   }
 `;
 
@@ -69,11 +69,14 @@ const Label = styled.label`
 `;
 
 const TextInput = ({ value, lock, active, id }) => {
-  const { input, handleInputChange, handleSubmit } = useTextInput({
-    TextInput
-  });
   const [focus, setFocus] = useState(false);
-  const [text, setText] = useState("");
+  const [text, setText] = useState(
+    localStorage.getItem("nameOfComponent") || ""
+  );
+
+  useEffect(() => {
+    localStorage.setItem("nameOfComponent", text);
+  }, [text]);
 
   const fieldClassName = `field ${(lock ? active : active || value) &&
     "active"} ${lock && !active && "locked"}`;
@@ -85,7 +88,6 @@ const TextInput = ({ value, lock, active, id }) => {
       onFocus={() => setFocus(true)}
       error=""
       label={label}
-      onSubmit={handleSubmit}
     >
       <Input
         id={id}

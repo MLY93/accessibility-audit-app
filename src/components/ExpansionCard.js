@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import RadioGroup from "./RadioGroup";
+import { UserConsumer } from "../GlobalState";
 
 const Panel = styled.div`
   margin-top: 20px;
@@ -73,12 +74,25 @@ const ExpansionCard = props => {
             <CheckboxLabel>No</CheckboxLabel>
             <CheckboxLabel>N/A</CheckboxLabel>
           </Labels>
-          <CheckList>
-            {props.subCategories &&
-              props.subCategories.map((item, i) => {
-                return <RadioGroup group={i} label={item.heading} />;
-              })}
-          </CheckList>
+          <UserConsumer>
+            {({ globalState, setQuestions }) => (
+              <CheckList>
+                {props.subCategories &&
+                  props.subCategories.map((item, i) => {
+                    return (
+                      <RadioGroup
+                        globalState={globalState}
+                        setQuestions={setQuestions}
+                        key={i}
+                        section={props.section}
+                        question={i}
+                        label={item.heading}
+                      />
+                    );
+                  })}
+              </CheckList>
+            )}
+          </UserConsumer>
         </>
       )}
     </Panel>

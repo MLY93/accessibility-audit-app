@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const CheckboxContainer = styled.div`
@@ -45,14 +45,11 @@ const StyledCheckbox = styled.div`
 `;
 
 const Checkbox = props => {
-  const [isChecked, setIsChecked] = useState(false);
+  const isChecked = props.selected === props.value;
+
   const onChange = () => {
     props.setSelectedFn(props.value);
   };
-
-  useEffect(() => {
-    setIsChecked(props.selected === props.value);
-  }, [props.selected]);
 
   return (
     <CheckboxContainer>
