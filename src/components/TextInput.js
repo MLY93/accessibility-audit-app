@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useStateValue } from "../context/StateContext";
 
 const Field = styled.div`
   width: 100%;
@@ -68,36 +69,25 @@ const Label = styled.label`
   }
 `;
 
-const TextInput = ({ value, lock, active, id }) => {
-  const [focus, setFocus] = useState(false);
-  const [text, setText] = useState(
-    localStorage.getItem("nameOfComponent") || ""
-  );
+const TextInput = ({ id }) => {
+  const [{ name }, dispatch] = useStateValue();
 
-  useEffect(() => {
-    localStorage.setItem("nameOfComponent", text);
-  }, [text]);
+  const updateName = value => {
+    dispatch({
+      type: "updateName",
+      newData: value
+    });
+  };
 
-  const fieldClassName = `field ${(lock ? active : active || value) &&
-    "active"} ${lock && !active && "locked"}`;
   const label = "Type the name of your Component here";
   return (
-    <Field
-      className={fieldClassName}
-      value=""
-      onFocus={() => setFocus(true)}
-      error=""
-      label={label}
-    >
+    <Field value="" error="" label={label}>
       <Input
         id={id}
-        value={text}
+        value={name}
         placeholder={label}
-        onFocus={() => !lock && setFocus(true)}
-        onBlur={() => !lock && setFocus(false)}
-        focus={focus}
         type="text"
-        onChange={event => setText(event.target.value)}
+        onChange={event => updateName(event.target.value)}
       />
       <Label htmlFor={1}>{label}</Label>
     </Field>

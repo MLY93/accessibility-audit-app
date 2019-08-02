@@ -60,9 +60,20 @@ const CheckboxLabel = styled.label`
 
 const ExpansionCard = props => {
   const [showMore, setShowMore] = useState(false);
+  const accessibileClick = event => {
+    if (event.keyCode === 13) {
+      setShowMore(!showMore);
+    }
+    return;
+  };
 
   return (
-    <Panel scale={props.scale}>
+    <Panel
+      tabIndex="0"
+      role="button"
+      scale={props.scale}
+      onKeyDown={event => accessibileClick(event)}
+    >
       <Required showMore={showMore} />
       <CategoryHeader onClick={() => setShowMore(!showMore)}>
         <Heading>{props.heading}</Heading>

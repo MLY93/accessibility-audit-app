@@ -1,6 +1,7 @@
 import React from "react";
 import Checkbox from "./Checkbox";
 import styled from "styled-components";
+import { useStateValue } from "../context/StateContext.js";
 
 const CheckListItem = styled.label`
   display: flex;
@@ -18,11 +19,15 @@ const RadioGroupContainer = styled.div`
 `;
 
 const RadioGroup = props => {
+  const [{ questions }, dispatch] = useStateValue();
   const questionKey = `key-${props.section}-${props.question}`;
-  const isSelected = props.globalState.questions[questionKey];
+  const isSelected = questions[questionKey];
 
   const updateQuestion = value => {
-    props.setQuestions(questionKey, value);
+    dispatch({
+      type: "updateQuestions",
+      newData: { ...questions, [questionKey]: value }
+    });
   };
 
   return (
