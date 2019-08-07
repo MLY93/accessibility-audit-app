@@ -1,6 +1,7 @@
 import React from "react";
 
 import { StateProvider } from "./src/context/StateContext";
+import "./src/components/layout.css";
 
 export const wrapRootElement = ({ element }) => {
   const initialState = {
