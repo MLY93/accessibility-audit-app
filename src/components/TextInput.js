@@ -74,7 +74,7 @@ const TextInput = ({ id }) => {
   const updateName = value => {
     dispatch({
       type: "updateName",
-      newData: { name: value }
+      newData: value
     });
   };
 
@@ -83,7 +83,7 @@ const TextInput = ({ id }) => {
     <Field value="" error="" label={label}>
       <Input
         id={id}
-        value={name.name || ""}
+        value={name || ""}
         placeholder={label}
         type="text"
         onChange={event => updateName(event.target.value)}

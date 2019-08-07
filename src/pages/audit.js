@@ -23,8 +23,7 @@ const Header = styled.h2`
 const PanelContainer = styled.div`
   display: flex;
   margin: 30px;
-  height: 80%;
-  max-width: 1240px;
+  max-width: 970px;
   justify-content: center;
   flex-direction: column;
 `;

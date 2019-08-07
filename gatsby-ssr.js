@@ -5,7 +5,7 @@ import "./src/components/layout.css";
 
 export const wrapRootElement = ({ element }) => {
   const initialState = {
-    name: {},
+    name: "",
     questions: {}
   };
   const reducer = (state, action) => {

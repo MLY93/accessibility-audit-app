@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import RadioGroup from "./RadioGroup";
-import { UserConsumer } from "../GlobalState";
 
 const Panel = styled.div`
   margin-top: 20px;
   background-color: #ffffff;
   box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
-  padding: 20px;
   width: 100%;
   position: relative;
   transform: ${props => `scale(${props.scale})`};
@@ -16,21 +14,17 @@ const Panel = styled.div`
 
 const Required = styled.div`
   border-left: 20px solid black;
-  border-right: 20px solid transparent;
   border-bottom: 20px solid transparent;
   position: absolute;
   height: 100%;
-  width: 0;
-  left: 0px;
-  top: 0;
-  z-index: 2;
+  cursor: pointer;
 `;
 
 const CategoryHeader = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  margin-bottom: 10px;
+  padding: 20px;
   cursor: pointer;
 `;
 
@@ -58,6 +52,10 @@ const CheckboxLabel = styled.label`
   display: inline-block;
 `;
 
+const ListContainer = styled.div`
+  padding: 0 20px 20px;
+`;
+
 const ExpansionCard = props => {
   const [showMore, setShowMore] = useState(false);
   const accessibileClick = event => {
@@ -74,37 +72,31 @@ const ExpansionCard = props => {
       scale={props.scale}
       onKeyDown={event => accessibileClick(event)}
     >
-      <Required showMore={showMore} />
+      <Required onClick={() => setShowMore(!showMore)} />
       <CategoryHeader onClick={() => setShowMore(!showMore)}>
         <Heading>{props.heading}</Heading>
       </CategoryHeader>
       {showMore && (
-        <>
+        <ListContainer>
           <Labels>
             <CheckboxLabel>Yes</CheckboxLabel>
             <CheckboxLabel>No</CheckboxLabel>
             <CheckboxLabel>N/A</CheckboxLabel>
           </Labels>
-          <UserConsumer>
-            {({ globalState, setQuestions }) => (
-              <CheckList>
-                {props.subCategories &&
-                  props.subCategories.map((item, i) => {
-                    return (
-                      <RadioGroup
-                        globalState={globalState}
-                        setQuestions={setQuestions}
-                        key={i}
-                        section={props.section}
-                        question={i}
-                        label={item.heading}
-                      />
-                    );
-                  })}
-              </CheckList>
-            )}
-          </UserConsumer>
-        </>
+          <CheckList>
+            {props.subCategories &&
+              props.subCategories.map((item, i) => {
+                return (
+                  <RadioGroup
+                    key={i}
+                    section={props.section}
+                    question={i}
+                    label={item.heading}
+                  />
+                );
+              })}
+          </CheckList>
+        </ListContainer>
       )}
     </Panel>
   );

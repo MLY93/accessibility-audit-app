@@ -14,9 +14,9 @@ const ExportButton = styled.button`
   cursor: pointer;
 `;
 
-const ExportAudit = props => {
-  const [{ questions }] = useStateValue({});
-  const fileName = "unnamed";
+const ExportAudit = () => {
+  const [{ questions, name }] = useStateValue();
+  const fileName = name || "unnamed";
 
   function download() {
     const file = new File([JSON.stringify(questions)], fileName, {
