@@ -10,10 +10,9 @@ import { StateProvider } from "./src/context/StateContext";
 
 export const wrapRootElement = ({ element }) => {
   const initialState = {
-    name: "Hi",
+    name: {},
     questions: {}
   };
-
   const reducer = (state, action) => {
     switch (action.type) {
       case "updateQuestions":

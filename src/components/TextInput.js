@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { useStateValue } from "../context/StateContext";
+import * as StateContext from "../context/StateContext";
 
 const Field = styled.div`
   width: 100%;
@@ -45,7 +45,7 @@ const Input = styled.input`
     padding: 24px 16px 8px 16px;
     top: 4px;
     opacity: 1;
-    color: #512da8;
+    color: #000;
   }
 `;
 
@@ -65,17 +65,16 @@ const Label = styled.label`
   &:active {
     top: 4px;
     opacity: 1;
-    color: #512da8;
   }
 `;
 
 const TextInput = ({ id }) => {
-  const [{ name }, dispatch] = useStateValue();
+  const [{ name }, dispatch] = StateContext.useStateValue();
 
   const updateName = value => {
     dispatch({
       type: "updateName",
-      newData: value
+      newData: { name: value }
     });
   };
 
@@ -84,7 +83,7 @@ const TextInput = ({ id }) => {
     <Field value="" error="" label={label}>
       <Input
         id={id}
-        value={name}
+        value={name.name || ""}
         placeholder={label}
         type="text"
         onChange={event => updateName(event.target.value)}

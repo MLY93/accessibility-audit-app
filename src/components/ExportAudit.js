@@ -14,10 +14,10 @@ const ExportButton = styled.button`
   cursor: pointer;
 `;
 
-const Export = props => {
-  const [{ name }] = useStateValue();
-  const [{ questions }] = useStateValue();
-  const fileName = name || "unnamed";
+const ExportAudit = props => {
+  const [{ questions }] = useStateValue({});
+  console.log("questions", questions);
+  const fileName = "unnamed";
 
   function download() {
     const file = new File([JSON.stringify(questions)], fileName, {
@@ -29,4 +29,4 @@ const Export = props => {
   return <ExportButton onClick={download}>Save and Export</ExportButton>;
 };
 
-export default Export;
+export default ExportAudit;

@@ -38,9 +38,9 @@ const auditPage = () => (
         {sectionsArray.map((item, i) => {
           return (
             <Motion
-              key={i}
               defaultStyle={{ scale: 0.5 }}
               style={{ scale: spring(1, { stiffness: 60, damping: 10 }) }}
+              key={i}
             >
               {interpolatedStyle => (
                 <ExpansionCard
