@@ -1,6 +1,6 @@
 import React from "react";
-import SEO from "../components/seo";
 import styled from "styled-components";
+import SEO from "../components/seo";
 
 const Page = styled.div`
   display: flex;
@@ -86,7 +86,7 @@ const HeadingRight = styled.a`
 
 const LandingPage = () => (
   <>
-    <SEO title="" />
+    <SEO title="Landing Page" />
     <Page>
       <Container>
         <InnerContent>

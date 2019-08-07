@@ -16,7 +16,6 @@ const ExportButton = styled.button`
 
 const ExportAudit = props => {
   const [{ questions }] = useStateValue({});
-  console.log("questions", questions);
   const fileName = "unnamed";
 
   function download() {
