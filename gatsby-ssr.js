@@ -10,7 +10,7 @@ import { StateProvider } from "./src/context/StateContext";
 import "./src/components/layout.css";
 
 export const wrapRootElement = ({ element }) => {
-  const componentData = JSON.parse(localStorage.getItem("ComponentData"));
+  const componentData = { name: "", questions: {} };
   console.log("componentData", componentData.name);
   const initialState = {
     name: componentData ? componentData.name : "",

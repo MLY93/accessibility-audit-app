@@ -40,7 +40,7 @@ const uploadPage = () => {
       newData: fileData.questions
     });
 
-    window.location = "audit";
+    window.location = "/audit";
   };
   return (
     <>

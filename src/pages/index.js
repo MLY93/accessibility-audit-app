@@ -127,7 +127,7 @@ const LandingPage = () => (
     <Page>
       <Container>
         <InnerContent>
-          <HeadingLeft href="audit">Audit</HeadingLeft>
+          <HeadingLeft href="/audit">Audit</HeadingLeft>
         </InnerContent>
       </Container>
 
@@ -148,7 +148,7 @@ const LandingPage = () => (
       </Slant>
       <Container background={"#fff"}>
         <InnerContent>
-          <HeadingRight href="upload">Review</HeadingRight>
+          <HeadingRight href="/upload">Review</HeadingRight>
         </InnerContent>
       </Container>
     </Page>
