@@ -41,7 +41,7 @@ const RadioGroup = props => {
         selected={isSelected}
         value="pass"
         color="green"
-        group={props.question}
+        group={questionKey}
         icon={<polyline points="20 6 9 17 4 12" />}
       />
       <Checkbox
@@ -49,7 +49,7 @@ const RadioGroup = props => {
         selected={isSelected}
         value="fail"
         color="red"
-        group={props.question}
+        group={questionKey}
         icon={
           <>
             <polyline points="6 6 18 18" />
@@ -62,7 +62,7 @@ const RadioGroup = props => {
         selected={isSelected}
         value="na"
         color="black"
-        group={props.question}
+        group={questionKey}
         icon={<polyline points="4 12 20 12" />}
       />
       <CheckListItem>

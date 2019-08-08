@@ -85,6 +85,7 @@ const TextInput = ({ id }) => {
         id={id}
         value={name || ""}
         placeholder={label}
+        label={label}
         type="text"
         onChange={event => updateName(event.target.value)}
       />

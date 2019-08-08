@@ -22,6 +22,11 @@ const Panel = styled.div`
       transform: scale(1);
     }
   }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #000;
+  }
 `;
 
 const Required = styled.div`
