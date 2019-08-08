@@ -82,10 +82,9 @@ const TextInput = ({ id }) => {
   return (
     <Field value="" error="" label={label}>
       <Input
-        id={id}
+        id={1}
         value={name || ""}
         placeholder={label}
-        label={label}
         type="text"
         onChange={event => updateName(event.target.value)}
       />
