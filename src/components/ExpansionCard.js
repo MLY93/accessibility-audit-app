@@ -9,7 +9,19 @@ const Panel = styled.div`
   border-radius: 5px;
   width: 100%;
   position: relative;
-  transform: ${props => `scale(${props.scale})`};
+  animation: stretch 0.5s ease-out 0s alternate 1 none running;
+
+  @keyframes stretch {
+    0% {
+      transform: scale(0.3);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 `;
 
 const Required = styled.div`

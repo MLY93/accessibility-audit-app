@@ -16,6 +16,10 @@ const RadioGroupContainer = styled.div`
   display: flex;
   border-bottom: 1px solid #ddd;
   padding: 4px 0;
+
+  @media (max-width: 620px) {
+    flex-wrap: wrap;
+  }
 `;
 
 const RadioGroup = props => {

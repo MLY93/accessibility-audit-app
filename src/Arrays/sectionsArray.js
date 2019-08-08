@@ -43,7 +43,7 @@ const sectionsArray = [
     subCategories: [
       {
         heading:
-          "Landmark regions have been given to communicate hte layout of a page to the Screenreader"
+          "Landmark regions have been given to communicate the layout of a page to the Screenreader"
       },
       {
         heading:

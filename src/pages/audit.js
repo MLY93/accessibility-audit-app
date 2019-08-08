@@ -4,14 +4,13 @@ import SEO from "../components/seo";
 import ExpansionCard from "../components/ExpansionCard";
 import sectionsArray from "../Arrays/sectionsArray";
 import TextInput from "../components/TextInput";
-import { Motion, spring } from "react-motion";
 import Export from "../components/ExportAudit";
 
 const Page = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 50px;
+  padding: 3%;
   width: 100%;
 `;
 
@@ -22,7 +21,6 @@ const Header = styled.h2`
 
 const PanelContainer = styled.div`
   display: flex;
-  margin: 30px;
   max-width: 970px;
   justify-content: center;
   flex-direction: column;
@@ -37,23 +35,15 @@ const auditPage = () => (
         <TextInput label="Type the name of your component here..." />
         {sectionsArray.map((item, i) => {
           return (
-            <Motion
-              defaultStyle={{ scale: 0.5 }}
-              style={{ scale: spring(1, { stiffness: 60, damping: 10 }) }}
+            <ExpansionCard
+              tabIndex="0"
+              role="button"
+              section={i}
               key={i}
-            >
-              {interpolatedStyle => (
-                <ExpansionCard
-                  tabIndex="0"
-                  role="button"
-                  section={i}
-                  scale={interpolatedStyle.scale}
-                  heading={item.heading}
-                  item={item.item}
-                  subCategories={item.subCategories}
-                />
-              )}
-            </Motion>
+              heading={item.heading}
+              item={item.item}
+              subCategories={item.subCategories}
+            />
           );
         })}
         <Export />

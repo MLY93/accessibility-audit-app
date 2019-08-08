@@ -11,6 +11,7 @@ const ExportButton = styled.button`
   margin-top: 30px;
   padding: 10px;
   border-radius: 5px;
+  border: none;
   cursor: pointer;
 `;
 
