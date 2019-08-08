@@ -20,9 +20,13 @@ const ExportAudit = () => {
   const fileName = name || "unnamed";
 
   function download() {
-    const file = new File([JSON.stringify(questions)], fileName, {
-      type: "application/json"
-    });
+    const file = new File(
+      [JSON.stringify({ name: fileName, questions: questions })],
+      fileName,
+      {
+        type: "application/json"
+      }
+    );
     saveAs(file);
   }
 

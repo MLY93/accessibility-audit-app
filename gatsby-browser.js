@@ -10,22 +10,29 @@ import { StateProvider } from "./src/context/StateContext";
 import "./src/components/layout.css";
 
 export const wrapRootElement = ({ element }) => {
+  const componentData = JSON.parse(localStorage.getItem("ComponentData"));
   const initialState = {
-    name: "",
-    questions: {}
+    name: componentData ? componentData.name : "",
+    questions: componentData ? componentData.questions : {}
   };
   const reducer = (state, action) => {
     switch (action.type) {
-      case "updateQuestions":
-        return {
-          ...state,
-          questions: action.newData
-        };
       case "updateName":
-        return {
+        const nameData = {
           ...state,
           name: action.newData
         };
+        localStorage.setItem("ComponentData", JSON.stringify(nameData));
+        return nameData;
+
+      case "updateQuestions":
+        const questionData = {
+          ...state,
+          questions: action.newData
+        };
+        localStorage.setItem("ComponentData", JSON.stringify(questionData));
+        return questionData;
+
       default:
         return state;
     }

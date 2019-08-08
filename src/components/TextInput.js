@@ -68,7 +68,7 @@ const Label = styled.label`
   }
 `;
 
-const TextInput = ({ id }) => {
+const TextInput = () => {
   const [{ name }, dispatch] = StateContext.useStateValue();
 
   const updateName = value => {
